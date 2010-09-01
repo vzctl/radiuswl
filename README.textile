@@ -1,0 +1,27 @@
+h1. radiuswl: RADIUS iptables matcher
+
+This is an iptables module and it can match RADIUS Caller-Station-Id and 3GPP-IMSI attributes. It also implements whitelisting by Station-Id ranges. Radiuswl is open source and released under the terms of the GNU General Public License v2
+
+h2. Usage
+
+radiuswl match options for RADIUS Access requests:
+ --radiuswl-any                 Match any request
+ --radiuswl-reserved            Match hardcoded list of station ids
+ --radiuswl-station-id num      Match particular Calling-Station-ID
+ --radiuswl-imsi       num      Match particular 3GPP-IMSI
+
+h2. Example
+
+iptables -A INPUT -m radiuswl --radiuswl-reserved -j ACCEPT
+iptables -A INPUT -m radiuswl --radiuswl-imsi 123456789012345 -j ACCEPT
+iptables -A INPUT -m radiuswl --radiuswl-station-id  111111111111 -j ACCEPT
+iptables -A INPUT -m radiuswl --radiuswl-any -j DROP
+
+h2. Notes
+
+* You should edit whitelist.c to change harcoded list of Station-Id ranges
+
+h2. Support & getting help
+
+For getting help or discussing about radiuswl, you can join #support on the irc.realisticgroup.com or email to lex.public@gmail.com.
+
